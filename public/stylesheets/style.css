@@ -5,3 +5,11 @@ body {
 
 a {
   color: #00B7FF; }
+
+#buffer-container {
+  height: 0px;
+  width: 0px;
+  overflow: hidden; }
+
+#connection-lost {
+  display: none; }

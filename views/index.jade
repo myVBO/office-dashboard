@@ -1,5 +1,8 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div(id="content")
+  div(id="buffer-container")
+    div(id="buffer")
+  div(id="connection-lost")
+    p Connection lost. Attempting to reconnect...
