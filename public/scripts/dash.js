@@ -4,7 +4,7 @@ var firstConnect = true;
 var sequence = 0;
 
 var socket = io.connect(
-  'http://localhost',
+  '/',
   { 
     'reconnection delay': 1000,
     'reconnection limit': 100,
@@ -23,7 +23,9 @@ function updateBuffer(){
   while ( buffer.firstChild ) {
     content.appendChild(buffer.firstChild);
   }
-  gel('content').style.display = 'block';
+
+  var content = gel('content');
+  content.style.display = 'block';
 }
 
 function updateContent( html ) {
