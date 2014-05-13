@@ -46,5 +46,6 @@ You will probably also want the window manager and X11 to start at boot and have
 * World time.
 * Google Analytics traffic data.
 * Notifications.
+* Scrum task board and burndown chart.
 
 [1]: https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager "Installing node.js"
