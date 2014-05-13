@@ -34,6 +34,10 @@ function updateContent( html ) {
   updateBuffer();
 }
 
+function updateFragment( fragment, html ) {
+  var fragment = gel(fragment);
+  fragment.innerHTML = html;
+}
 
 socket.on('disconnect', function() {
   gel('content').style.display = 'none';
@@ -54,6 +58,13 @@ socket.on('load', function (data) {
   if ( data.sequence >= sequence ) {
     sequence = data.sequence;
     updateContent( data.html );
+  }
+});
+
+socket.on('fragment', function (data) {
+  if ( data.sequence >= sequence ) {
+    sequence = data.sequence;
+    updateFragment( data.fragment, data.html );
   }
 });
 

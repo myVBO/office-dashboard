@@ -15,7 +15,7 @@ html, body, #content {
   height: 100%;
   background-color: #000;
   color: #fff;
-  font-size: 20px;
+  font-size: 25px;
 }
 
 html, body, div, p {
@@ -56,8 +56,8 @@ a {
     &.row-4 { @include row(4); }
 
     .well {
-      background-color: #222;
-      border: 1px solid #FFF;
+      background-color: #353535;
+      border: 3px solid #FFF;
       @include border-radius(10px);
       margin: 10px;
       padding: 10px;

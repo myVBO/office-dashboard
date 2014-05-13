@@ -1,5 +1,6 @@
 var jade = require('jade');
 var fs = require('fs');
+var jsdom = require("jsdom").jsdom;
 
 function renderDash(name,data) {
   var path = 'views/dash/'+name+'.jade';
@@ -8,19 +9,58 @@ function renderDash(name,data) {
 }
 
 var content = {
-  sequence: 1,
+  sequence: new Date().getTime(),
   html: renderDash('nocontent')
 };
 
-module.exports = function( server )  {
-  var io = require('socket.io').listen(server);
+var io;
 
-  io.sockets.on('connection', function (socket) {
-    socket.emit('handshake', { version: '0.1' });
+module.exports = {
+  listen: function(server) {
+    io = require('socket.io').listen(server);
 
-    socket.on('fetch', function(data) {
-      socket.emit('load', content );
+    io.sockets.on('connection', function (socket) {
+      socket.emit('handshake', { version: '0.1' });
 
+      socket.on('fetch', function(data) {
+        socket.emit('load', content );
+
+      });
     });
-  });
+  },
+
+  setContent : function(html) {
+    content.html = html;
+    content.sequence = new Date().getTime();
+    io.sockets.emit('load',content);
+    return true;
+  },
+
+  setFragment : function(fragment, html) {
+    var dom = jsdom('<html><body>'+content.html+'</body></html>');
+
+    var node = dom.getElementById(fragment);
+    node.innerHTML = html;
+    content.html = dom.body.innerHTML;
+
+    if ( node ) {
+      content.sequence = new Date().getTime();
+      io.sockets.emit('fragment',{sequence: content.sequence, html: html, fragment: fragment});
+      return true;
+    }
+
+    return false;
+  },
+
+  getFragment : function(fragment) {
+    var dom = jsdom('<html><body>'+content.html+'</body></html>');
+
+    var node = dom.getElementById(fragment);
+
+    return node ? node.innerHTML : null;
+  },
+
+  getContent : function() {
+    return content;
+  }
 };

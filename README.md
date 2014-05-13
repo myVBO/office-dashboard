@@ -4,7 +4,7 @@ This project is a lightweight dashboard intended to be displayed on a TV in the 
 
 The goal is to give the software engineering team added visibility into relevant operational information. Although intended for use at Ziftr it may be useful to other software teams.
 
-## Usage
+## Getting Started
 
 1. Install node.js and npm 
 2. Clone the Git repository
