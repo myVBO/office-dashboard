@@ -33,4 +33,17 @@ router.patch(/\/content\/([A-Za-z0-9\-]+)/, function(req, res) {
     res.send({ status: 404 });
 });
 
+router.post('/sound', function(req, res) {
+  socket.playSound(req.body.url);
+console.log('playing');
+  res.send({ status: 200 });
+});
+
+router.delete('/sound', function(req, res) {
+  socket.stopSound();
+  res.send({ status: 200 });
+});
+
+
+
 module.exports = router;

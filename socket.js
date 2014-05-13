@@ -10,7 +10,8 @@ function renderDash(name,data) {
 
 var content = {
   sequence: new Date().getTime(),
-  html: renderDash('nocontent')
+  html: renderDash('nocontent'),
+  audio: null
 };
 
 var io;
@@ -20,10 +21,10 @@ module.exports = {
     io = require('socket.io').listen(server);
 
     io.sockets.on('connection', function (socket) {
-      socket.emit('handshake', { version: '0.1' });
+      socket.emit('handshake', { version: '0.2' });
 
       socket.on('fetch', function(data) {
-        socket.emit('load', content );
+        socket.emit('content', content );
 
       });
     });
@@ -32,7 +33,7 @@ module.exports = {
   setContent : function(html) {
     content.html = html;
     content.sequence = new Date().getTime();
-    io.sockets.emit('load',content);
+    io.sockets.emit('content',content);
     return true;
   },
 
@@ -62,5 +63,15 @@ module.exports = {
 
   getContent : function() {
     return content;
-  }
+  },
+
+  playSound : function(url) {
+    io.sockets.emit('sound',{url: url});
+    return true;
+  },
+
+  stopSound : function() {
+    io.sockets.emit('sound',{url: null});
+    return true;
+  },
 };

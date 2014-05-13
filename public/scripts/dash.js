@@ -1,7 +1,9 @@
-var clientVersion = "0.1";
+var clientVersion = "0.2";
 
 var firstConnect = true;
 var sequence = 0;
+
+var audio = null;
 
 var socket = io.connect(
   '/',
@@ -54,10 +56,19 @@ socket.on('handshake', function(data) {
   }
 });
 
-socket.on('load', function (data) {
+socket.on('content', function (data) {
   if ( data.sequence >= sequence ) {
     sequence = data.sequence;
     updateContent( data.html );
+  }
+});
+
+socket.on('sound', function(data) {
+  if ( audio ) audio.pause();
+
+  if ( data.url ) {
+    audio = new Audio(data.url);
+    audio.play();
   }
 });
 

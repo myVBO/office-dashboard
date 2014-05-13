@@ -4,6 +4,12 @@ This project is a lightweight dashboard intended to be displayed on a TV in the 
 
 The goal is to give the software engineering team added visibility into relevant operational information. Although intended for use at Ziftr it may be useful to other software teams.
 
+## Features
+
++ Synchronize dashboard displays accross multiple computers.
++ RESTful API for updating dashboard content.
++ Play audio.
+
 ## Getting Started
 
 1. Install node.js and npm 
@@ -31,7 +37,12 @@ sudo dpkg -i node_*
 
 Note that installing from source may take several hours on the Pi.
 
-You will probably also want the window manager and X11 to start at boot and have the web browser start. You can do this from the configuration manager.
+In order to play audio you will also need some additional packages:
+```
+sudo apt-get install gstreamer0.10-plugins-base gstreamer0.10-plugins-good gstreamer0.10-plugins-bad gstreamer0.10-plugins-ugly
+```
+
+You will probably also want the window manager and web browser to start at boot and have the web browser start. You can do this from the configuration manager.
 
 ## Planned Features
 
