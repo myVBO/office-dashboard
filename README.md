@@ -58,5 +58,6 @@ You will probably also want the window manager and web browser to start at boot 
 * Google Analytics traffic data.
 * Notifications.
 * Scrum task board and burndown chart.
+* Board With Locations of Office works IE in office, Home. (A Clock Face Was Suggested)
 
 [1]: https://github.com/joyent/node/wiki/Installing-Node.js-via-package-manager "Installing node.js"
